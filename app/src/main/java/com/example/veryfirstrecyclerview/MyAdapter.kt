@@ -21,8 +21,12 @@ class MyAdapter : RecyclerView.Adapter<MyViewHolder>() {
         holder.itemTextView.text = myList[position]
     }
 
-    fun addItem(){
-        myList.add("My task"+(myList.size+1).toString())
+    fun addItem(item: String = ""){
+        if(item.isEmpty()){
+            myList.add("My task"+(myList.size+1).toString())
+        }else{
+            myList.add(item)
+        }
         notifyDataSetChanged()
     }
 }
