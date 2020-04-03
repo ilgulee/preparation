@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import java.util.zip.Inflater
 
 class MyAdapter : RecyclerView.Adapter<MyViewHolder>() {
-    private val myList = listOf("My task1", "My task2", "My task3", "My task3", "My task4")
+    private val myList = mutableListOf("My task1", "My task2", "My task3", "My task4", "My task5")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.list_item_view_holder, parent, false)
@@ -19,5 +19,10 @@ class MyAdapter : RecyclerView.Adapter<MyViewHolder>() {
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.itemTextView.text = myList[position]
+    }
+
+    fun addItem(){
+        myList.add("My task"+(myList.size+1).toString())
+        notifyDataSetChanged()
     }
 }
