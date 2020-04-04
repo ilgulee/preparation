@@ -3,10 +3,9 @@ package com.example.veryfirstrecyclerview
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import java.util.zip.Inflater
 
-class MyAdapter : RecyclerView.Adapter<MyViewHolder>() {
-    private val myList = mutableListOf("My task1", "My task2", "My task3", "My task4", "My task5")
+class MyAdapter(private val itemList: ArrayList<ItemList>) : RecyclerView.Adapter<MyViewHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.list_item_view_holder, parent, false)
@@ -14,19 +13,16 @@ class MyAdapter : RecyclerView.Adapter<MyViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return myList.size
+        return itemList.size
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.itemTextView.text = myList[position]
+        holder.itemTextView.text = itemList[position].listName
     }
 
-    fun addItem(item: String = ""){
-        if(item.isEmpty()){
-            myList.add("My task"+(myList.size+1).toString())
-        }else{
-            myList.add(item)
-        }
-        notifyDataSetChanged()
+    fun addList(list: ItemList) {
+        itemList.add(list)
+        //notifyDataSetChanged()
+        notifyItemInserted(itemList.size - 1)
     }
 }
